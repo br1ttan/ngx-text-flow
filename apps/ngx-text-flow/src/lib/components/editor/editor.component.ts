@@ -41,7 +41,7 @@ export class EditorComponent {
     }
   }
 
-  public onEditorClick(buttons: IButton[]): void {
+  public onEditorClick(): void {
     const selection = this.document.getSelection();
     this.setAllButtonsNotActive();
 
