@@ -1,0 +1,31 @@
+{
+  "name": "ngx-text-flow",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "ngx-text-flow/src",
+  "prefix": "text-flow",
+  "tags": [],
+  "projectType": "library",
+  "targets": {
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "ngx-text-flow/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["ngx-text-flow/**/*.ts", "ngx-text-flow/**/*.html"]
+      }
+    }
+  }
+}

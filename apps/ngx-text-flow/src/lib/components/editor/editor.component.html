@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="options">
+    <button
+      *ngFor="let button of buttons"
+      (click)="onButtonClick(button)"
+      [class.active]="button.isActive">
+      <i [class]="button.iconClasses"></i>
+    </button>
+
+    <select id="formatBlock" class="adv-option-button">
+      <option value="H1">H1</option>
+      <option value="H2">H2</option>
+      <option value="H3">H3</option>
+      <option value="H4">H4</option>
+      <option value="H5">H5</option>
+      <option value="H6">H6</option>
+    </select>
+
+    <select id="fontName" class="adv-option-button">
+      <option value="Arial">Arial</option>
+      <option value="Verdana">Verdana</option>
+      <option value="Times New Roman">Times New Roman</option>
+      <option value="Garamond">Garamond</option>
+      <option value="Georgia">Georgia</option>
+      <option value="Courier New">Courier New</option>
+      <option value="cursive">cursive</option>
+    </select>
+    <select id="fontSize" class="adv-option-button"></select>
+
+    <div class="input-wrapper">
+      <input type="color" id="foreColor" class="adv-option-button" />
+      <label for="foreColor">Font Color</label>
+    </div>
+    <div class="input-wrapper">
+      <input type="color" id="backColor" class="adv-option-button" />
+      <label for="backColor">Highlight Color</label>
+    </div>
+  </div>
+  <div
+    #textEditor
+    id="text-input"
+    contenteditable="true"
+    (click)="onEditorClick(buttons)"
+    (blur)="onEditorBlur()"></div>
+</div>
