@@ -14,10 +14,13 @@ export class EditorComponent {
   public textEditor!: ElementRef<HTMLDivElement>;
 
   private get isTextEditorSelected(): boolean {
-    return (
-      this.document.getSelection()?.focusNode?.parentNode ==
-      this.textEditor.nativeElement
-    );
+    let parentNode = this.document.getSelection()?.focusNode?.parentNode;
+
+    while (parentNode?.nodeName !== this.containerElement) {
+      parentNode = parentNode?.parentNode;
+    }
+
+    return parentNode == this.textEditor.nativeElement;
   }
 
   public readonly buttons = BUTTON_ARRAY;
