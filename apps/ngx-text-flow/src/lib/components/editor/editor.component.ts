@@ -13,31 +13,40 @@ export class EditorComponent {
   @ViewChild('textEditor')
   public textEditor!: ElementRef<HTMLDivElement>;
 
+  private get isTextEditorSelected(): boolean {
+    return (
+      this.document.getSelection()?.focusNode?.parentNode ==
+      this.textEditor.nativeElement
+    );
+  }
+
   public readonly buttons = BUTTON_ARRAY;
   private readonly containerElement = 'DIV';
 
   constructor(@Inject(DOCUMENT) private readonly document: Document) {}
 
   public onButtonClick(button: IButton): void {
-    const selection = this.document.getSelection();
+    if (this.isTextEditorSelected) {
+      const selection = this.document.getSelection();
 
-    if (!button.isActive) {
-      if (selection && !selection.isCollapsed) {
-        const range = selection.getRangeAt(0);
-        const selectedText = range.toString();
+      if (!button.isActive) {
+        if (selection && !selection.isCollapsed) {
+          const range = selection.getRangeAt(0);
+          const selectedText = range.toString();
 
-        if (selectedText) {
-          const element = document.createElement(button.tag);
-          element.textContent = selectedText;
+          if (selectedText) {
+            const element = document.createElement(button.tag);
+            element.textContent = selectedText;
 
-          range.deleteContents();
-          range.insertNode(element);
+            range.deleteContents();
+            range.insertNode(element);
 
-          selection.removeAllRanges();
+            selection.removeAllRanges();
+          }
         }
+      } else {
+        // Here will be a functional which can remove selected element by button
       }
-    } else {
-      // Here will be a functional which can remove selected element by button
     }
   }
 
